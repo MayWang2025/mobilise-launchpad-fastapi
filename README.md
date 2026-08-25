@@ -8,3 +8,6 @@ http://127.0.0.1:8000
 
 Mobilisation Request
 http://127.0.0.1:8000/mobilisation/request
+
+http://127.0.0.1:8000/worker/W001/status
+
