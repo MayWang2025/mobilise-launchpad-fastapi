@@ -3,9 +3,24 @@ from pydantic import BaseModel
 import sqlite3
 
 app = FastAPI()
+@app.get("/health")
+def health_check():
+    return {"status": "ok"}
 
 DB_PATH = "/Users/jtwang/Desktop/mobilize_launchpad.db"
+class LoginRequest(BaseModel):
+    username: str
+    password: str
 
+@app.post("/login")
+def login(request: LoginRequest):
+    if request.username == "coordinator01" and request.password == "demo123":
+        return {
+            "status": "success",
+            "role": "Mobilisation Coordinator"
+        }
+
+    raise HTTPException(status_code=401, detail="Invalid username or password")
 
 @app.get("/worker/{worker_id}/status")
 def get_worker_status(worker_id: str):
